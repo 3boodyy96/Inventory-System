@@ -1,12 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 </head>
+
 <body>
     <h1>Inventory System</h1>
 </body>
-    <script src="script.js"></script>
+<script>
+    alert("welcome to inventory system \n chose an option:");
+    inventory = [];
+    for (; ;) {
+        userOptionsInputs = prompt(
+            "1- add item \n 2- delete item \n 3- show items \n 4- show total price \n 5- exit",
+        );
+
+        // add item
+        if (userOptionsInputs == 1) {
+            let itemName = prompt("Enter item name");
+            // check if item name is empty
+            if (itemName === "") {
+                alert("Item name cannot be empty");
+                continue;
+            }
+
+            let itemQuantity = prompt("Enter item quantity");
+            let itemPrice = itemQuantity * 10;
+
+            // check if item already exists
+            let found = false;
+            for (let i = 0; i < inventory.length; i++) {
+                if (inventory[i].name === itemName) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found) {
+                alert("Item already exists!");
+            } else {
+                inventory.push({
+                    name: itemName,
+                    quantity: itemQuantity,
+                    price: itemPrice
+                });
+                alert("Item added!");
+            }
+        }
+        // delete item
+        else if (userOptionsInputs == 2) {
+            let itemName = prompt("Enter item name to delete");
+            let found = false;
+            for (let i = 0; i < inventory.length; i++) {
+                if (inventory[i].name === itemName) {
+                    inventory.splice(i, 1);
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                alert("Item deleted!");
+            } else {
+                alert("Item does not exist!");
+            }
+        }
+        // show items
+        else if (userOptionsInputs == 3) {
+            let itemsList = inventory.map(item =>
+                `Name: ${item.name}, Quantity: ${item.quantity}, Price: ${item.price}`
+            ).join("\n");
+            alert(itemsList);
+
+            // show total price
+        } else if (userOptionsInputs == 4) {
+            let totalPrice = 0
+            Prices = "Total price: " + inventory.map(
+                item => totalPrice += item.price
+            )
+            alert(totalPrice);
+
+            // exit
+        } else if (userOptionsInputs == 5) {
+            alert("good bye");
+            break;
+        }
+        // invalid input
+        else {
+            alert("invalid input");
+        }
+    }
+</script>
+
 </html>
